@@ -41,19 +41,19 @@ const Dashboard: React.FC<DashboardProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-olive-50 to-olive-100 p-4">
+    <div className="min-h-screen bg-background dark">
       <div className="max-w-md mx-auto space-y-6">
         {/* Header */}
         <div className="text-center pt-6 pb-4">
           <div className="flex items-center justify-center mb-2">
             <Shield className="h-8 w-8 text-olive-600 mr-2" />
-            <h1 className="text-2xl font-bold text-olive-800">ReadyScore</h1>
+            <h1 className="text-2xl font-bold text-foreground">ReadyScore</h1>
           </div>
-          <p className="text-olive-600">Emergency Preparedness Tracker</p>
+          <p className="text-muted-foreground">Emergency Preparedness Tracker</p>
         </div>
 
         {/* Readiness Meter */}
-        <Card className="p-6 bg-white/90 backdrop-blur-sm border-olive-200">
+        <Card className="p-6 bg-card border-border">
           <div className="text-center space-y-4">
             <div className="relative">
               <div className="w-32 h-32 mx-auto">
@@ -63,7 +63,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                     cy="50"
                     r="40"
                     fill="none"
-                    stroke="#e5e7eb"
+                    stroke="hsl(var(--muted))"
                     strokeWidth="8"
                   />
                   <circle
@@ -87,7 +87,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                     <div className={`text-2xl font-bold ${getReadinessColor(readinessScore)}`}>
                       {Math.round(readinessScore)}%
                     </div>
-                    <div className="text-xs text-olive-600">Ready</div>
+                    <div className="text-xs text-muted-foreground">Ready</div>
                   </div>
                 </div>
               </div>
@@ -97,10 +97,10 @@ const Dashboard: React.FC<DashboardProps> = ({
               <h3 className={`text-lg font-semibold ${getReadinessColor(readinessScore)}`}>
                 {getReadinessMessage(daysOfSurvival)}
               </h3>
-              <p className="text-olive-700">
+              <p className="text-foreground">
                 <span className="font-bold text-xl">{daysOfSurvival.toFixed(1)}</span> days of supplies
               </p>
-              <p className="text-sm text-olive-600">
+              <p className="text-sm text-muted-foreground">
                 for {householdSize} {householdSize === 1 ? 'person' : 'people'}
               </p>
             </div>
@@ -109,15 +109,15 @@ const Dashboard: React.FC<DashboardProps> = ({
 
         {/* Top Gaps */}
         {topGaps.length > 0 && (
-          <Card className="p-4 bg-white/90 backdrop-blur-sm border-olive-200">
+          <Card className="p-4 bg-card border-border">
             <div className="flex items-center mb-3">
               <AlertTriangle className="h-5 w-5 text-safety-500 mr-2" />
-              <h3 className="font-semibold text-olive-800">Priority Gaps</h3>
+              <h3 className="font-semibold text-foreground">Priority Gaps</h3>
             </div>
             <div className="space-y-2">
               {topGaps.slice(0, 3).map((gap, index) => (
-                <div key={index} className="flex justify-between items-center p-2 bg-safety-50 rounded-lg border border-safety-200">
-                  <span className="text-sm font-medium text-olive-700">{gap.category}</span>
+                <div key={index} className="flex justify-between items-center p-2 bg-muted rounded-lg border border-border">
+                  <span className="text-sm font-medium text-foreground">{gap.category}</span>
                   <span className="text-sm text-safety-600 font-medium">
                     {gap.shortfall.toFixed(1)} days short
                   </span>
@@ -140,16 +140,16 @@ const Dashboard: React.FC<DashboardProps> = ({
           <Button 
             onClick={onViewInventory}
             variant="outline"
-            className="w-full border-olive-300 text-olive-700 hover:bg-olive-50 py-4"
+            className="w-full border-border text-foreground hover:bg-muted py-4"
           >
             View Full Inventory
           </Button>
         </div>
 
         {/* Quick Tips */}
-        <Card className="p-4 bg-olive-50 border-olive-200">
-          <h4 className="font-semibold text-olive-800 mb-2">Quick Tip</h4>
-          <p className="text-sm text-olive-700">
+        <Card className="p-4 bg-card border-border">
+          <h4 className="font-semibold text-foreground mb-2">Quick Tip</h4>
+          <p className="text-sm text-muted-foreground">
             FEMA recommends at least 3 days of supplies. Focus on water (1 gallon per person per day) and non-perishable food first.
           </p>
         </Card>
