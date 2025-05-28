@@ -23,9 +23,9 @@ const Dashboard: React.FC<DashboardProps> = ({
   onViewInventory
 }) => {
   const getReadinessColor = (score: number) => {
-    if (score >= 75) return 'text-ready';
-    if (score >= 50) return 'text-warning';
-    return 'text-danger';
+    if (score >= 75) return 'text-emerald-400';
+    if (score >= 50) return 'text-amber-400';
+    return 'text-red-400';
   };
 
   const getReadinessMessage = (days: number) => {
@@ -35,25 +35,25 @@ const Dashboard: React.FC<DashboardProps> = ({
   };
 
   const getProgressColor = (score: number) => {
-    if (score >= 75) return 'bg-ready';
-    if (score >= 50) return 'bg-warning';
-    return 'bg-danger';
+    if (score >= 75) return 'text-emerald-400';
+    if (score >= 50) return 'text-amber-400';
+    return 'text-red-400';
   };
 
   return (
-    <div className="min-h-screen bg-background dark">
-      <div className="max-w-md mx-auto space-y-6">
+    <div className="min-h-screen bg-slate-900 text-white">
+      <div className="max-w-md mx-auto space-y-6 p-4">
         {/* Header */}
         <div className="text-center pt-6 pb-4">
           <div className="flex items-center justify-center mb-2">
-            <Shield className="h-8 w-8 text-olive-600 mr-2" />
-            <h1 className="text-2xl font-bold text-foreground">ReadyScore</h1>
+            <Shield className="h-8 w-8 text-olive-500 mr-2" />
+            <h1 className="text-2xl font-bold text-white">ReadyScore</h1>
           </div>
-          <p className="text-muted-foreground">Emergency Preparedness Tracker</p>
+          <p className="text-slate-400">Emergency Preparedness Tracker</p>
         </div>
 
         {/* Readiness Meter */}
-        <Card className="p-6 bg-card border-border">
+        <Card className="p-6 bg-slate-800 border-slate-700">
           <div className="text-center space-y-4">
             <div className="relative">
               <div className="w-32 h-32 mx-auto">
@@ -63,7 +63,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                     cy="50"
                     r="40"
                     fill="none"
-                    stroke="hsl(var(--muted))"
+                    stroke="#374151"
                     strokeWidth="8"
                   />
                   <circle
@@ -76,10 +76,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                     strokeLinecap="round"
                     strokeDasharray={`${2 * Math.PI * 40}`}
                     strokeDashoffset={`${2 * Math.PI * 40 * (1 - readinessScore / 100)}`}
-                    className={`transition-all duration-1000 ${
-                      readinessScore >= 75 ? 'text-ready' : 
-                      readinessScore >= 50 ? 'text-warning' : 'text-danger'
-                    }`}
+                    className={`transition-all duration-1000 ${getProgressColor(readinessScore)}`}
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -87,7 +84,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                     <div className={`text-2xl font-bold ${getReadinessColor(readinessScore)}`}>
                       {Math.round(readinessScore)}%
                     </div>
-                    <div className="text-xs text-muted-foreground">Ready</div>
+                    <div className="text-xs text-slate-400">Ready</div>
                   </div>
                 </div>
               </div>
@@ -97,10 +94,10 @@ const Dashboard: React.FC<DashboardProps> = ({
               <h3 className={`text-lg font-semibold ${getReadinessColor(readinessScore)}`}>
                 {getReadinessMessage(daysOfSurvival)}
               </h3>
-              <p className="text-foreground">
+              <p className="text-white">
                 <span className="font-bold text-xl">{daysOfSurvival.toFixed(1)}</span> days of supplies
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-slate-400">
                 for {householdSize} {householdSize === 1 ? 'person' : 'people'}
               </p>
             </div>
@@ -109,16 +106,16 @@ const Dashboard: React.FC<DashboardProps> = ({
 
         {/* Top Gaps */}
         {topGaps.length > 0 && (
-          <Card className="p-4 bg-card border-border">
+          <Card className="p-4 bg-slate-800 border-slate-700">
             <div className="flex items-center mb-3">
-              <AlertTriangle className="h-5 w-5 text-safety-500 mr-2" />
-              <h3 className="font-semibold text-foreground">Priority Gaps</h3>
+              <AlertTriangle className="h-5 w-5 text-amber-400 mr-2" />
+              <h3 className="font-semibold text-white">Priority Gaps</h3>
             </div>
             <div className="space-y-2">
               {topGaps.slice(0, 3).map((gap, index) => (
-                <div key={index} className="flex justify-between items-center p-2 bg-muted rounded-lg border border-border">
-                  <span className="text-sm font-medium text-foreground">{gap.category}</span>
-                  <span className="text-sm text-safety-600 font-medium">
+                <div key={index} className="flex justify-between items-center p-3 bg-slate-700 rounded-lg border border-slate-600">
+                  <span className="text-sm font-medium text-white">{gap.category}</span>
+                  <span className="text-sm text-red-400 font-medium">
                     {gap.shortfall.toFixed(1)} days short
                   </span>
                 </div>
@@ -131,7 +128,7 @@ const Dashboard: React.FC<DashboardProps> = ({
         <div className="space-y-3">
           <Button 
             onClick={onAddSupplies}
-            className="w-full bg-safety-500 hover:bg-safety-600 text-white py-6 text-lg font-semibold"
+            className="w-full bg-olive-600 hover:bg-olive-700 text-white py-6 text-lg font-semibold border-0"
           >
             <Plus className="h-5 w-5 mr-2" />
             Add Supplies
@@ -140,16 +137,16 @@ const Dashboard: React.FC<DashboardProps> = ({
           <Button 
             onClick={onViewInventory}
             variant="outline"
-            className="w-full border-border text-foreground hover:bg-muted py-4"
+            className="w-full border-slate-600 bg-slate-800 text-white hover:bg-slate-700 hover:border-slate-500 py-4"
           >
             View Full Inventory
           </Button>
         </div>
 
         {/* Quick Tips */}
-        <Card className="p-4 bg-card border-border">
-          <h4 className="font-semibold text-foreground mb-2">Quick Tip</h4>
-          <p className="text-sm text-muted-foreground">
+        <Card className="p-4 bg-slate-800 border-slate-700">
+          <h4 className="font-semibold text-white mb-2">Quick Tip</h4>
+          <p className="text-sm text-slate-400">
             FEMA recommends at least 3 days of supplies. Focus on water (1 gallon per person per day) and non-perishable food first.
           </p>
         </Card>
