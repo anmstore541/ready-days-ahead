@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Dashboard from '@/components/Dashboard';
 import OnboardingWizard from '@/components/OnboardingWizard';
@@ -57,9 +56,11 @@ const Index = () => {
     localStorage.setItem('readyscore-inventory', JSON.stringify(inventory));
   }, [inventory]);
 
-  const handleOnboardingComplete = (data: HouseholdData) => {
+  const handleOnboardingComplete = (data: any) => {
     console.log('Onboarding completed:', data);
-    setHouseholdData(data);
+    const { inventory: onboardingInventory, ...household } = data;
+    setHouseholdData(household);
+    setInventory(onboardingInventory || []);
     setCurrentView('dashboard');
   };
 
@@ -123,10 +124,10 @@ const Index = () => {
 
   // Fallback - should not reach here
   return (
-    <div className="min-h-screen bg-olive-50 flex items-center justify-center">
+    <div className="min-h-screen bg-background dark flex items-center justify-center">
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-olive-800 mb-4">ReadyScore</h1>
-        <p className="text-olive-600">Loading...</p>
+        <h1 className="text-2xl font-bold text-foreground mb-4">ReadyScore</h1>
+        <p className="text-muted-foreground">Loading...</p>
       </div>
     </div>
   );
