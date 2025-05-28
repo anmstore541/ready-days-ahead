@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Shield, Users, MapPin, CheckCircle, Package, Droplets, Utensils, Plus } from 'lucide-react';
+import { Shield, Users, MapPin, CheckCircle, Package, Droplets, Utensils, Plus, Wrench } from 'lucide-react';
 
 interface InventoryItem {
   id: string;
@@ -63,34 +63,109 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
   const inventoryCategories = [
     {
       id: 'water',
-      name: 'Water',
+      name: 'Water & Food',
       icon: Droplets,
       items: [
         { name: 'Drinking Water', unit: 'gallons', daysPerUnit: 1 },
         { name: 'Water Bottles', unit: 'bottles', daysPerUnit: 0.125 },
-        { name: 'Water Purification Tablets', unit: 'tablets', daysPerUnit: 0.1 }
-      ]
-    },
-    {
-      id: 'food',
-      name: 'Food',
-      icon: Utensils,
-      items: [
-        { name: 'Canned Food', unit: 'cans', daysPerUnit: 0.33 },
+        { name: 'Water Purification Tablets', unit: 'tablets', daysPerUnit: 0.1 },
+        { name: 'Ready-to-eat meats', unit: 'cans', daysPerUnit: 0.5 },
+        { name: 'Canned fruits and vegetables', unit: 'cans', daysPerUnit: 0.33 },
+        { name: 'Canned or boxed juices', unit: 'containers', daysPerUnit: 0.25 },
+        { name: 'Canned milk and soup', unit: 'cans', daysPerUnit: 0.5 },
+        { name: 'Peanut butter', unit: 'jars', daysPerUnit: 3 },
+        { name: 'Jelly', unit: 'jars', daysPerUnit: 2 },
+        { name: 'Low-sodium crackers', unit: 'boxes', daysPerUnit: 1 },
+        { name: 'Granola bars', unit: 'bars', daysPerUnit: 0.25 },
+        { name: 'Trail mix', unit: 'bags', daysPerUnit: 1 },
+        { name: 'Vitamins', unit: 'bottles', daysPerUnit: 30 },
+        { name: 'Special foods for infants', unit: 'jars', daysPerUnit: 0.33 },
+        { name: 'Cookies', unit: 'packages', daysPerUnit: 1 },
+        { name: 'Hard candy', unit: 'bags', daysPerUnit: 2 },
+        { name: 'Instant coffee', unit: 'jars', daysPerUnit: 10 },
+        { name: 'Cereals', unit: 'boxes', daysPerUnit: 2 },
+        { name: 'Powdered milk', unit: 'containers', daysPerUnit: 5 },
         { name: 'Dry Rice', unit: 'pounds', daysPerUnit: 2 },
-        { name: 'Pasta', unit: 'pounds', daysPerUnit: 2 },
-        { name: 'Peanut Butter', unit: 'jars', daysPerUnit: 3 },
-        { name: 'Energy Bars', unit: 'bars', daysPerUnit: 0.25 }
+        { name: 'Pasta', unit: 'pounds', daysPerUnit: 2 }
       ]
     },
     {
       id: 'medical',
-      name: 'Medical',
+      name: 'Medical Supplies',
       icon: Shield,
       items: [
-        { name: 'First Aid Kit', unit: 'kits', daysPerUnit: 30 },
-        { name: 'Prescription Medications', unit: 'days', daysPerUnit: 1 },
-        { name: 'Pain Relievers', unit: 'bottles', daysPerUnit: 30 }
+        { name: 'Adhesive bandages, various sizes', unit: 'boxes', daysPerUnit: 30 },
+        { name: '5" x 9" sterile dressing', unit: 'pieces', daysPerUnit: 10 },
+        { name: 'Conforming roller gauze bandage', unit: 'rolls', daysPerUnit: 15 },
+        { name: 'Triangular bandages', unit: 'pieces', daysPerUnit: 20 },
+        { name: '3" x 3" sterile gauze pads', unit: 'pads', daysPerUnit: 5 },
+        { name: '4" x 4" sterile gauze pads', unit: 'pads', daysPerUnit: 5 },
+        { name: 'Roll 3" cohesive bandage', unit: 'rolls', daysPerUnit: 15 },
+        { name: 'Germicidal hand wipes', unit: 'packages', daysPerUnit: 10 },
+        { name: 'Alcohol-based hand sanitizer', unit: 'bottles', daysPerUnit: 15 },
+        { name: 'Antiseptic wipes', unit: 'packages', daysPerUnit: 10 },
+        { name: 'Medical grade non-latex gloves', unit: 'pairs', daysPerUnit: 2 },
+        { name: 'Tongue depressor blades', unit: 'pieces', daysPerUnit: 1 },
+        { name: 'Adhesive tape, 2" width', unit: 'rolls', daysPerUnit: 20 },
+        { name: 'Antibacterial ointment', unit: 'tubes', daysPerUnit: 30 },
+        { name: 'Cold pack', unit: 'packs', daysPerUnit: 10 },
+        { name: 'Small scissors', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Tweezers', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Safety pins, assorted sizes', unit: 'packages', daysPerUnit: 180 },
+        { name: 'Cotton balls', unit: 'bags', daysPerUnit: 30 },
+        { name: 'Thermometer', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Petroleum jelly', unit: 'tubes', daysPerUnit: 60 },
+        { name: 'Sunscreen', unit: 'bottles', daysPerUnit: 30 },
+        { name: 'CPR breathing barrier/face shield', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'First aid manual', unit: 'books', daysPerUnit: 365 },
+        { name: 'Aspirin', unit: 'bottles', daysPerUnit: 60 },
+        { name: 'Non-aspirin pain reliever', unit: 'bottles', daysPerUnit: 60 },
+        { name: 'Anti-diarrhea medication', unit: 'packages', daysPerUnit: 30 },
+        { name: 'Antacid', unit: 'bottles', daysPerUnit: 30 },
+        { name: 'Laxative', unit: 'packages', daysPerUnit: 30 },
+        { name: 'Prescription medications', unit: 'days', daysPerUnit: 1 },
+        { name: 'Extra eyeglasses/contact lenses', unit: 'pairs', daysPerUnit: 365 }
+      ]
+    },
+    {
+      id: 'tools',
+      name: 'Tools & Gear',
+      icon: Wrench,
+      items: [
+        { name: 'Portable battery-powered radio', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Extra batteries for radio', unit: 'packs', daysPerUnit: 30 },
+        { name: 'Manual can opener', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'NOAA Weather Radio', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Mess kits', unit: 'sets', daysPerUnit: 365 },
+        { name: 'Paper cups and plates', unit: 'packages', daysPerUnit: 7 },
+        { name: 'Plastic utensils', unit: 'packages', daysPerUnit: 7 },
+        { name: 'Flashlight', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Extra batteries for flashlight', unit: 'packs', daysPerUnit: 30 },
+        { name: 'All-purpose knife', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Signal flare', unit: 'pieces', daysPerUnit: 30 },
+        { name: 'Waterproof matches', unit: 'boxes', daysPerUnit: 30 },
+        { name: 'Sugar, salt, pepper', unit: 'containers', daysPerUnit: 60 },
+        { name: 'Shut-off wrench', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Pliers', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Shovel', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Aluminum foil', unit: 'rolls', daysPerUnit: 30 },
+        { name: 'Plastic wrap', unit: 'rolls', daysPerUnit: 30 },
+        { name: 'Duct tape', unit: 'rolls', daysPerUnit: 60 },
+        { name: 'Resealable plastic bags', unit: 'boxes', daysPerUnit: 30 },
+        { name: 'Plastic sheeting', unit: 'sheets', daysPerUnit: 180 },
+        { name: 'Small cooking stove', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Cooking fuel', unit: 'cans', daysPerUnit: 10 },
+        { name: 'Whistle', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'ABC-type fire extinguisher', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Tube tent', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Games and cards', unit: 'sets', daysPerUnit: 365 },
+        { name: 'Compass', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Work gloves', unit: 'pairs', daysPerUnit: 180 },
+        { name: 'Books', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Paper, pens, and pencils', unit: 'sets', daysPerUnit: 180 },
+        { name: 'Toys for kids', unit: 'pieces', daysPerUnit: 365 },
+        { name: 'Needles and thread', unit: 'kits', daysPerUnit: 365 },
+        { name: 'Battery-operated alarm clock', unit: 'pieces', daysPerUnit: 365 }
       ]
     }
   ];
@@ -186,7 +261,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted dark class">
+    <div className="min-h-screen bg-background dark">
       {/* Header */}
       <div className="text-center mb-8 pt-8">
         <div className="flex items-center justify-center mb-4">
@@ -394,7 +469,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                   className: "h-12 w-12 text-olive-600 mx-auto mb-3"
                 })}
                 <h2 className="text-xl font-bold text-foreground mb-2">
-                  {inventoryCategories[currentCategory].name} Supplies
+                  {inventoryCategories[currentCategory].name}
                 </h2>
                 <p className="text-muted-foreground">
                   Add your current {inventoryCategories[currentCategory].name.toLowerCase()} supplies
@@ -402,7 +477,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
               </div>
 
               {/* Current Category Items */}
-              <div className="space-y-3">
+              <div className="space-y-3 max-h-32 overflow-y-auto">
                 {getCategoryItems().map((item) => (
                   <div key={item.id} className="flex items-center justify-between p-3 bg-muted rounded-lg">
                     <div>
@@ -441,7 +516,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                     <SelectTrigger>
                       <SelectValue placeholder="Select an item" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="max-h-48 overflow-y-auto">
                       {inventoryCategories[currentCategory].items.map((item) => (
                         <SelectItem key={item.name} value={item.name}>
                           {item.name}
